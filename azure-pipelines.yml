@@ -101,4 +101,5 @@ stages:
             --container-name devops \
             --file $(Build.SourcesDirectory)/target/nextwork-web-project.war \
             --name $(artifactName) \
-            --account-key $STORAGE_ACCOUNT_KEY
+            --auth-mode key \
+            --account-key "$STORAGE_ACCOUNT_KEY"
