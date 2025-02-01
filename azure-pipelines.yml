@@ -92,8 +92,8 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: |
           az storage blob upload \
-            --account-name fouedtrabelsi \
-            --container-name devopsbuildartefact \
-            --file $(Build.ArtifactStagingDirectory)/$(artifactName).zip \
+            --account-name devopsbuildartefact \
+            --container-name devops \
+            --file $(Build.ArtifactStagingDirectory)/$(artifactName) \
             --name $(artifactName) \
-            --auth-mode key
+            --auth-mode login
