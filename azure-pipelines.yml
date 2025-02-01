@@ -43,7 +43,7 @@ stages:
       displayName: 'Set MAVEN_HOME for Maven 3.5.2'
 
     # Step 4: Restore dependencies from Azure Artifacts
-    - task: Maven@4  # Use Maven@4 (updated version) since Maven@3 is deprecated
+    - task: Maven@4  # Use Maven@4 (updated version)
       inputs:
         mavenPomFile: 'pom.xml'
         options: '-s /home/ubuntu/.m2/settings.xml'
