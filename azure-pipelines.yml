@@ -46,7 +46,7 @@ stages:
     - task: Maven@4  # Use Maven@4 (updated version) since Maven@3 is deprecated
       inputs:
         mavenPomFile: 'pom.xml'
-        options: '-s /home/azureuser/.m2/settings.xml'
+        options: '-s /home/ubuntu/.m2/settings.xml'
         goals: 'dependency:resolve'
 
     # Step 5: Compile the code
