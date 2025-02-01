@@ -92,9 +92,13 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
+          # Set the storage account key as an environment variable
+          STORAGE_ACCOUNT_KEY=$(STORAGE_ACCOUNT_KEY)
+          
+          # Upload the file to Azure Blob Storage
           az storage blob upload \
             --account-name devopsbuildartefact \
             --container-name devops \
             --file $(Build.SourcesDirectory)/target/nextwork-web-project.war \
             --name $(artifactName) \
-            STORAGE_ACCOUNT_KEY="$(STORAGE_ACCOUNT_KEY)"
+            --account-key $STORAGE_ACCOUNT_KEY
