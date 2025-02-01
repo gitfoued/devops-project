@@ -94,6 +94,6 @@ stages:
           az storage blob upload \
             --account-name devopsbuildartefact \
             --container-name devops \
-            --file $(Build.ArtifactStagingDirectory)/$(artifactName) \
+            --file $(Build.SourcesDirectory)/target/nextwork-web-project.war \
             --name $(artifactName) \
             --auth-mode login
