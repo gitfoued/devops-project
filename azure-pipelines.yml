@@ -6,6 +6,7 @@ pool:
 
 variables:
   # Project name and artifact details
+  group: StorageAccountKeys
   projectName: 'devops-project'
   artifactName: 'devops-project-build.zip'
   artifactPath: '$(Build.ArtifactStagingDirectory)/$(artifactName)'
@@ -96,4 +97,4 @@ stages:
             --container-name devops \
             --file $(Build.SourcesDirectory)/target/nextwork-web-project.war \
             --name $(artifactName) \
-            --auth-mode login
+            STORAGE_ACCOUNT_KEY="$(STORAGE_ACCOUNT_KEY)"
