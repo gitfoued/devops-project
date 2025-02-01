@@ -37,5 +37,59 @@ stages:
         export PATH=$JAVA_HOME/bin:$PATH
         java -version  # Vérification de l'environnement Java
       displayName: 'Set JAVA_HOME for Maven'
+# Étape 1 : Restaurer les dépendances depuis Azure Artifacts
+    - task: Maven@3
+      inputs:
+        mavenPomFile: 'pom.xml'
+        options: '-s settings.xml'
+        goals: 'dependency:resolve'  # Télécharge les dépendances
+# Étape 2 : Compiler le code
+    - task: Maven@3
+      inputs:
+        mavenPomFile: 'pom.xml'
+        options: '-s settings.xml'
+        goals: 'clean compile'
 
+    # Étape 3 : Générer le fichier de build (JAR/WAR)
+    - task: Maven@3
+      inputs:
+        mavenPomFile: 'pom.xml'
+        options: '-s settings.xml'
+        goals: 'package'
+
+    # Étape 4 : Compresser le fichier de build
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(artifactName)'
+        replaceExistingArchive: true
+
+    # Étape 5 : Publier l'artefact dans Azure DevOps (optionnel)
+    - task: PublishBuildArtifacts@1
+      inputs:
+        artifactName: '$(artifactName)'
+        targetPath: '$(Build.ArtifactStagingDirectory)'
+        publishLocation: 'Container'
+
+- stage: UploadToBlob
+  dependsOn: Build
+  jobs:
+  - job: UploadToBlobStorage
+    steps:
+    # Étape 6 : Uploader le fichier de build dans Blob Storage
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'access-connection'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage blob upload \
+            --account-name fouedtrabelsi \
+            --container-name devopsbuildartefact \
+            --file $(Build.ArtifactStagingDirectory)/$(artifactName) \
+            --name $(artifactName) \
+            --auth-mode key
+    
     
