@@ -53,14 +53,14 @@ stages:
     - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml'
-        options: '-s settings.xml'
+        options: '-s /home/ubuntu/.m2/settings.xml'
         goals: 'clean compile'
 
     # Step 6: Generate the build file (JAR/WAR)
     - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml'
-        options: '-s settings.xml'
+        options: '-s /home/ubuntu/.m2/settings.xml'
         goals: 'package'
 
     # Step 7: Archive the build file
