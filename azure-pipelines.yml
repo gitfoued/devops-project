@@ -8,7 +8,6 @@ trigger:
 
 pool:
   vmImage: 'ubuntu-latest'
-  name: 'my-custom-agent'
 
 variables:
   # Nom du projet et du package
