@@ -38,11 +38,4 @@ stages:
         java -version  # Vérification de l'environnement Java
       displayName: 'Set JAVA_HOME for Maven'
 
-    # Étape 1 : Restaurer les dépendances depuis Azure Artifacts
-    - task: Maven@3
-      inputs:
-        mavenPomFile: 'pom.xml'
-        options: '-s settings.xml'
-        goals: 'dependency:resolve'  # Télécharge les dépendances
-
     
