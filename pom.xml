@@ -18,4 +18,25 @@
   <build>
     <finalName>nextwork-web-project</finalName>
   </build>
+  <repositories>
+    <repository>
+        <id>devops-azure-packages</id>
+        <url>https://pkgs.dev.azure.com/fouedtrabelsu2002/devops-project/_packaging/devops-azure-packages/maven/v1</url>
+        <releases>
+            <enabled>true</enabled>
+        </releases>
+        <snapshots>
+            <enabled>true</enabled>
+        </snapshots>
+    </repository>
+</repositories>
+
+<distributionManagement>
+    <repository>
+        <id>devops-azure-packages</id>
+        <url>https://pkgs.dev.azure.com/fouedtrabelsu2002/devops-project/_packaging/devops-azure-packages/maven/v1</url>
+    </repository>
+</distributionManagement>
+
 </project>
+
